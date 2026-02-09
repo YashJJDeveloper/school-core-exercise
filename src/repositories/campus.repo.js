@@ -1,10 +1,17 @@
 const db = require("../db/db.js");
 
-const getAllCampuses = async () => {
-    const query = "SELECT * FROM campus";
-    const {rows} = await db.query(query);
-    return rows;
-}
+const getAllCampuses = async (limit, offset) => {
+    const query = `
+      SELECT *
+      FROM campus
+      
+      LIMIT $1 OFFSET $2
+    `;
+  
+    const result = await db.query(query, [limit, offset]);
+    return result.rows;
+  };
+
 
 const getCampusById = async (campus_id) => {
     const query = "SELECT * FROM campus WHERE campus_id = $1";

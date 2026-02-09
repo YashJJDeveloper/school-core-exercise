@@ -2,12 +2,20 @@ const campusService = require("../services/campus.service.js");
 
 const getAllCampuses = async (req, res) => {
     try {
-        const campus = await campusService.getAllCampuses();
-        res.json(campus);
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 10;
+      const offset = (page - 1) * limit;
+  
+      const result = await campusService.getAllCampuses(limit, offset);
+  
+      res.json({
+       
+        data: result
+      });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+      res.status(500).json({ error: error.message });
     }
-}
+  };
 
 const getCampusById = async (req, res) => {
     try {

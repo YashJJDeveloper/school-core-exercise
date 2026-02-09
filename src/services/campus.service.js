@@ -1,9 +1,11 @@
 const campusRepo = require("../repositories/campus.repo.js");
 
-const getAllCampuses = async () => {
-    return await campusRepo.getAllCampuses();
-}
-
+// const getAllCampuses = async () => {
+//     return await campusRepo.getAllCampuses();
+// }
+const getAllCampuses = async (limit, offset) => {
+    return await campusRepo.getAllCampuses(limit, offset);
+  };
 const getCampusById = async (campus_id) => {
     return await campusRepo.getCampusById(campus_id);
 }
